@@ -28,8 +28,8 @@ export function renderToast(message, action) {
 				action.handler()
 			}
 			// renderToast(null)
-      renderToast({ text: 'Это пример уведомления. Используйте его при необходимости', type: 'success' },
-        { name: 'Понял', handler: () => { console.log('Уведомление закрыто') } })
+			// renderToast({ text: 'Это пример уведомления. Используйте его при необходимости', type: 'success' },
+			//   { name: 'Понял', handler: () => { console.log('Уведомление закрыто') } })
 		}
 	}
 }
