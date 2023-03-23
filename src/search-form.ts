@@ -1,9 +1,20 @@
 import { renderBlock } from './lib.js'
 
-export function renderSearchFormBlock () {
-  renderBlock(
-    'search-form-block',
-    `
+export function checkDate() {
+	const checkOutDate = document.getElementById('check-out-date') as HTMLInputElement | null;
+	const checkInDate = document.getElementById('check-in-date') as HTMLInputElement | null;
+	const currentDate = new Date(checkOutDate.value);
+
+
+	console.log(currentDate.getFullYear())
+	// console.log(checkOutDate.value)
+}
+
+
+export function renderSearchFormBlock() {
+	renderBlock(
+		'search-form-block',
+		`
     <form>
       <fieldset class="search-filedset">
         <div class="row">
@@ -37,5 +48,5 @@ export function renderSearchFormBlock () {
       </fieldset>
     </form>
     `
-  )
+	)
 }
