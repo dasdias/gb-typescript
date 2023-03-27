@@ -20,9 +20,10 @@ export function checkDate(): object {
 
 
 export function renderSearchFormBlock() {
-	const currentDate = new Date();
-	const currentDatePlusMonth = new Date();
-	const dateMonth = new Date(currentDatePlusMonth.setMonth(currentDate.getMonth() + 1))
+  const t = new Date();
+  const currentDate = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  const lastDayNextMonths = new Date(t.getFullYear(), t.getMonth() + 2, 0)
+
 	function formatDate(currentDate: Date) {
 
 		function prependZero(number: number): string {
@@ -56,7 +57,7 @@ export function renderSearchFormBlock() {
         <div class="row">
           <div>
             <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value="${formatDate(currentDate)}" min="${formatDate(currentDate)}" max="${formatDate(dateMonth)}" name="checkin" />
+            <input id="check-in-date" type="date" value="${formatDate(currentDate)}" min="${formatDate(currentDate)}" max="${formatDate(lastDayNextMonths)}" name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>
