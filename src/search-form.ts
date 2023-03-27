@@ -22,7 +22,11 @@ export function checkDate(): object {
 export function renderSearchFormBlock() {
   const t = new Date();
   const currentDate = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  const currentDatePlusDay = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 1);
+  const dateDeparture = new Date(currentDatePlusDay.getTime() + 1000 * 60 * 60 * 48);
+
   const lastDayNextMonths = new Date(t.getFullYear(), t.getMonth() + 2, 0)
+  console.log(dateDeparture);
 
 	function formatDate(currentDate: Date) {
 
@@ -57,11 +61,11 @@ export function renderSearchFormBlock() {
         <div class="row">
           <div>
             <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value="${formatDate(currentDate)}" min="${formatDate(currentDate)}" max="${formatDate(lastDayNextMonths)}" name="checkin" />
+            <input id="check-in-date" type="date" value="${formatDate(currentDatePlusDay)}" min="${formatDate(currentDate)}" max="${formatDate(lastDayNextMonths)}" name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>
-            <input id="check-out-date" type="date" value="2021-05-13" min="2021-05-11" max="2021-06-30" name="checkout" />
+            <input id="check-out-date" type="date" value="${formatDate(dateDeparture)}" min="${formatDate(currentDate)}" max="${formatDate(lastDayNextMonths)}" name="checkout" />
           </div>
           <div>
             <label for="max-price">Макс. цена суток</label>
