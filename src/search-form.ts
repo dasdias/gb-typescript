@@ -1,47 +1,45 @@
 import { renderBlock } from './lib.js'
 
 export function checkDate(): object {
-  const dateEnter: {
-    checkOutDate: number | null,
-    checkInDate: number | null,
-  } = {
-    checkOutDate: null,
-    checkInDate: null
-  };
-  const checkOutDate = document.getElementById('check-out-date') as HTMLInputElement | null;
-  const checkInDate = document.getElementById('check-in-date') as HTMLInputElement | null;
-  const currentDate = new Date(checkOutDate.value);
+	const dateEnter: {
+		checkOutDate: number | null,
+		checkInDate: number | null,
+	} = {
+		checkOutDate: null,
+		checkInDate: null
+	};
+	const checkOutDate = document.getElementById('check-out-date') as HTMLInputElement | null;
+	const checkInDate = document.getElementById('check-in-date') as HTMLInputElement | null;
+	const currentDate = new Date(checkOutDate.value);
 
-  // dateEnter.checkOutDate = checkOutDate
-  // console.log(checkInDate.value)
-  // console.log(checkOutDate.value)
-  return dateEnter
+	// dateEnter.checkOutDate = checkOutDate
+	// console.log(checkInDate.value)
+	// console.log(checkOutDate.value)
+	return dateEnter
 }
 
 
 export function renderSearchFormBlock() {
-  const currentDate = new Date();
-  // console.log(currentDate.toISOString())
+	const currentDate = new Date();
+	const currentDatePlusMonth = new Date();
+	const dateMonth = new Date(currentDatePlusMonth.setMonth(currentDate.getMonth() + 1))
+	function formatDate(currentDate: Date) {
 
-  const datePlusMonth = new Date(currentDate.setMonth(currentDate.getMonth() + 1))
+		function prependZero(number: number): string {
+			if (number < 9)
+				return "0" + number;
+			else
+				return number.toString();
+		}
 
-  console.log(formatDate(datePlusMonth))
-  function formatDate(currentDate: Date) {
-
-    function prependZero(number: number | string): string | number {
-      if (number < 9)
-        return "0" + number;
-      else
-        return number;
-    }
-    const year = currentDate.getFullYear()
-    const month = currentDate.getMonth()
-    const date = currentDate.getDate().toString();
-    return `${year}-${prependZero(month)}-${prependZero(date)}`
-  }
-  renderBlock(
-    'search-form-block',
-    `
+		const year = currentDate.getFullYear();
+		const month = currentDate.getMonth() + 1;
+		const date = currentDate.getDate();
+		return `${year}-${prependZero(month)}-${prependZero(date)}`
+	}
+	renderBlock(
+		'search-form-block',
+		`
     <form>
       <fieldset class="search-filedset">
         <div class="row">
@@ -58,7 +56,7 @@ export function renderSearchFormBlock() {
         <div class="row">
           <div>
             <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value="${formatDate(currentDate)}" min="${formatDate(currentDate)}" max="${formatDate(datePlusMonth)}" name="checkin" />
+            <input id="check-in-date" type="date" value="${formatDate(currentDate)}" min="${formatDate(currentDate)}" max="${formatDate(dateMonth)}" name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>
@@ -75,5 +73,5 @@ export function renderSearchFormBlock() {
       </fieldset>
     </form>
     `
-  )
+	)
 }
