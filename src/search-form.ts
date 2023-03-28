@@ -1,21 +1,26 @@
 import { renderBlock } from './lib.js'
 
-export function checkDate(): object {
-	const dateEnter: {
-		checkOutDate: number | null,
-		checkInDate: number | null,
-	} = {
-		checkOutDate: null,
-		checkInDate: null
-	};
+export function checkDate() {
+	// const dateEnter: {
+	// 	checkOutDate: number | null,
+	// 	checkInDate: number | null,
+	// } = {
+	// 	checkOutDate: null,
+	// 	checkInDate: null
+	// };
 	const checkOutDate = document.getElementById('check-out-date') as HTMLInputElement | null;
 	const checkInDate = document.getElementById('check-in-date') as HTMLInputElement | null;
-	const currentDate = new Date(checkOutDate.value);
-
+	checkInDate.addEventListener('change', (e) => {
+		console.log(checkInDate.value);
+		// console.log(checkOutDate.value)
+	})
+	checkOutDate.addEventListener('change', (e) => {
+		console.log(checkOutDate.value)
+	})
 	// dateEnter.checkOutDate = checkOutDate
 	// console.log(checkInDate.value)
 	// console.log(checkOutDate.value)
-	return dateEnter
+	return
 }
 
 
@@ -26,7 +31,7 @@ export function renderSearchFormBlock() {
   const dateDeparture = new Date(currentDatePlusDay.getTime() + 1000 * 60 * 60 * 48);
 
   const lastDayNextMonths = new Date(t.getFullYear(), t.getMonth() + 2, 0)
-  console.log(dateDeparture);
+  // console.log(dateDeparture);
 
 	function formatDate(currentDate: Date) {
 
@@ -42,6 +47,10 @@ export function renderSearchFormBlock() {
 		const date = currentDate.getDate();
 		return `${year}-${prependZero(month)}-${prependZero(date)}`
 	}
+
+	// value = "${formatDate(currentDatePlusDay)}"
+	// value = "${formatDate(dateDeparture)}"
+
 	renderBlock(
 		'search-form-block',
 		`
