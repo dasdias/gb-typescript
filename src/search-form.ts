@@ -8,15 +8,15 @@ export function checkDate() {
 	// 	checkOutDate: null,
 	// 	checkInDate: null
 	// };
-	const checkOutDate = document.getElementById('check-out-date') as HTMLInputElement | null;
-	const checkInDate = document.getElementById('check-in-date') as HTMLInputElement | null;
-	checkInDate.addEventListener('change', (e) => {
-		console.log(checkInDate.value);
-		// console.log(checkOutDate.value)
-	})
-	checkOutDate.addEventListener('change', (e) => {
-		console.log(checkOutDate.value)
-	})
+	// const checkOutDate = document.getElementById('check-out-date') as HTMLInputElement | null;
+	// const checkInDate = document.getElementById('check-in-date') as HTMLInputElement | null;
+	// checkInDate.addEventListener('change', (e) => {
+	// 	console.log(checkInDate.value);
+	// 	// console.log(checkOutDate.value)
+	// })
+	// checkOutDate.addEventListener('change', (e) => {
+	// 	console.log(checkOutDate.value)
+	// })
 	// dateEnter.checkOutDate = checkOutDate
 	// console.log(checkInDate.value)
 	// console.log(checkOutDate.value)
@@ -24,14 +24,17 @@ export function checkDate() {
 }
 
 
-export function renderSearchFormBlock() {
+export function renderSearchFormBlock(checkInDate: string | undefined = "", checkOutDate: string | undefined = "" ) {
   const t = new Date();
   const currentDate = new Date(t.getFullYear(), t.getMonth(), t.getDate());
   const currentDatePlusDay = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 1);
   const dateDeparture = new Date(currentDatePlusDay.getTime() + 1000 * 60 * 60 * 48);
 
   const lastDayNextMonths = new Date(t.getFullYear(), t.getMonth() + 2, 0)
-  // console.log(dateDeparture);
+  
+	console.log('checkInDate', checkInDate);
+	console.log('checkOutDate', checkOutDate);
+
 
 	function formatDate(currentDate: Date) {
 
