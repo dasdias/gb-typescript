@@ -1,42 +1,18 @@
 import { renderBlock } from './lib.js'
 
-export function checkDate() {
-	// const dateEnter: {
-	// 	checkOutDate: number | null,
-	// 	checkInDate: number | null,
-	// } = {
-	// 	checkOutDate: null,
-	// 	checkInDate: null
-	// };
-	// const checkOutDate = document.getElementById('check-out-date') as HTMLInputElement | null;
-	// const checkInDate = document.getElementById('check-in-date') as HTMLInputElement | null;
-	// checkInDate.addEventListener('change', (e) => {
-	// 	console.log(checkInDate.value);
-	// 	// console.log(checkOutDate.value)
-	// })
-	// checkOutDate.addEventListener('change', (e) => {
-	// 	console.log(checkOutDate.value)
-	// })
-	// dateEnter.checkOutDate = checkOutDate
-	// console.log(checkInDate.value)
-	// console.log(checkOutDate.value)
-	return
-}
-
-
 export function renderSearchFormBlock(checkInDate: string | undefined = "", checkOutDate: string | undefined = "" ) {
-  const t = new Date();
-  const currentDate = new Date(t.getFullYear(), t.getMonth(), t.getDate());
-  const currentDatePlusDay = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 1);
-  const dateDeparture = new Date(currentDatePlusDay.getTime() + 1000 * 60 * 60 * 48);
+  const t: Date = new Date();
+  const currentDate: Date = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  const currentDatePlusDay: Date = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 1);
+  const dateDeparture: Date = new Date(currentDatePlusDay.getTime() + 1000 * 60 * 60 * 48);
 
-  const lastDayNextMonths = new Date(t.getFullYear(), t.getMonth() + 2, 0)
+  const lastDayNextMonths: Date = new Date(t.getFullYear(), t.getMonth() + 2, 0);
+
+  const argCheckIn: Date = new Date(checkInDate);
+  const argCheckOut: Date = new Date(checkOutDate);
   
-	console.log('checkInDate', checkInDate);
-	console.log('checkOutDate', checkOutDate);
 
-
-	function formatDate(currentDate: Date) {
+	function formatDate(currentDate: Date): string {
 
 		function prependZero(number: number): string {
 			if (number < 9)
@@ -45,14 +21,11 @@ export function renderSearchFormBlock(checkInDate: string | undefined = "", chec
 				return number.toString();
 		}
 
-		const year = currentDate.getFullYear();
-		const month = currentDate.getMonth() + 1;
-		const date = currentDate.getDate();
+		const year: number = currentDate.getFullYear();
+    const month: number = currentDate.getMonth() + 1;
+    const date: number = currentDate.getDate();
 		return `${year}-${prependZero(month)}-${prependZero(date)}`
 	}
-
-	// value = "${formatDate(currentDatePlusDay)}"
-	// value = "${formatDate(dateDeparture)}"
 
 	renderBlock(
 		'search-form-block',
@@ -73,11 +46,11 @@ export function renderSearchFormBlock(checkInDate: string | undefined = "", chec
         <div class="row">
           <div>
             <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value="${formatDate(currentDatePlusDay)}" min="${formatDate(currentDate)}" max="${formatDate(lastDayNextMonths)}" name="checkin" />
+            <input id="check-in-date" type="date" value="${formatDate(argCheckIn) ? formatDate(argCheckIn) : formatDate(currentDatePlusDay) }" min="${formatDate(currentDate)}" max="${formatDate(lastDayNextMonths)}" name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>
-            <input id="check-out-date" type="date" value="${formatDate(dateDeparture)}" min="${formatDate(currentDate)}" max="${formatDate(lastDayNextMonths)}" name="checkout" />
+            <input id="check-out-date" type="date" value="${formatDate(argCheckOut) ? formatDate(argCheckOut) : formatDate(dateDeparture) }" min="${formatDate(currentDate)}" max="${formatDate(lastDayNextMonths)}" name="checkout" />
           </div>
           <div>
             <label for="max-price">Макс. цена суток</label>
