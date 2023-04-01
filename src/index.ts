@@ -2,9 +2,13 @@ import { renderSearchFormBlock } from './search-form.js'
 import { renderSearchStubBlock } from './search-results.js'
 import { renderUserBlock } from './user.js'
 import { renderToast } from './lib.js'
+import { getUserData, getFavoritesAmount } from './localStorage.js'
+
+const user = getUserData('user');
+const favoritesAmount = getFavoritesAmount('favoritesAmount');
 
 window.addEventListener('DOMContentLoaded', () => {
-	renderUserBlock('Wade Warren', '/img/avatar.png', 2)
+  renderUserBlock(user, favoritesAmount )
   renderSearchStubBlock()
   renderSearchFormBlock('2023-03-31', '2023-04-02')
 	renderToast(
@@ -18,5 +22,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 	)
+
+  
+  
+
+
+
 
 })
